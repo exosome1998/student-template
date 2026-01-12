@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}Announcements - Student Portal{% endblock %}
+
+{% block content %}
+<h2>School Announcements 📢</h2>
+<p style="color: #666; margin-bottom: 30px;">Latest news and updates from the school</p>
+
+<div style="margin-bottom: 40px;">
+    {% if announcements %}
+        {% for announcement in announcements %}
+        <div class="card">
+            <h3>{{ announcement.title }}</h3>
+            <p style="font-size: 14px; color: #999; margin-bottom: 10px;">{{ announcement.date }}</p>
+            <p>{{ announcement.content }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="color: #999;">No announcements at this time.</p>
+    {% endif %}
+</div>
+
+<hr style="margin: 40px 0; border: none; border-top: 2px solid #eee;">
+
+<h3 style="margin-bottom: 20px;">Student Comments 💬</h3>
+
+<form method="POST" action="/announcements.html" style="margin-bottom: 30px;">
+    <div class="form-group">
+        <label for="comment">Add a Comment</label>
+        <textarea id="comment" name="comment" rows="3" placeholder="Share your thoughts..." required></textarea>
+    </div>
+    <button type="submit" class="btn">Post Comment</button>
+</form>
+
+<div>
+    {% if comments %}
+        {% for comment in comments %}
+        <div class="comment">
+            <div class="comment-meta">
+                <strong>{{ comment.name }}</strong> • {{ comment.date }}
+            </div>
+            <!-- VULNERABILITY: XSS - comment is not escaped -->
+            <div>{{ comment.comment|safe }}</div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="color: #999;">No comments yet. Be the first to comment!</p>
+    {% endif %}
+</div>
+
+<div style="background: #fff3cd; padding: 15px; border-radius: 5px; border-left: 4px solid #ffc107; margin-top: 30px;">
+    <p style="font-size: 14px; color: #856404;">
+        <strong>💡 Hint for Assessment:</strong> Try posting a comment with HTML or JavaScript code.
+        What happens? This is a major security vulnerability!
+    </p>
+</div>
+{% endblock %}
