@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}Submit Assignment - Student Portal{% endblock %}
+
+{% block content %}
+<h2>Submit Assignment 📝</h2>
+<p style="color: #666; margin-bottom: 30px;">Submit a link to your completed assignment</p>
+
+{% if message %}
+<div class="message">{{ message }}</div>
+{% endif %}
+
+<form method="POST" action="/submit.html">
+    <div class="form-group">
+        <label for="assignment">Assignment Name</label>
+        <input type="text" id="assignment" name="assignment" placeholder="e.g., Math Homework Week 3" required>
+    </div>
+
+    <div class="form-group">
+        <label for="link">Assignment Link</label>
+        <input type="text" id="link" name="link" placeholder="e.g., https://drive.google.com/..." required>
+    </div>
+
+    <button type="submit" class="btn">Submit Assignment</button>
+</form>
+
+<div style="background: #fff3cd; padding: 15px; border-radius: 5px; border-left: 4px solid #ffc107; margin-top: 30px;">
+    <p style="font-size: 14px; color: #856404;">
+        <strong>💡 Hint for Assessment:</strong> Try submitting SQL commands in the assignment name or link fields.
+        Can you exploit this form?
+    </p>
+</div>
+{% endblock %}

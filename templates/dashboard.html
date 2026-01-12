@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard - Student Portal{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ name }}! 📚</h2>
+<p style="color: #666; margin-bottom: 30px;">View your grades and academic progress</p>
+
+<div class="card">
+    <h3>Your Grades</h3>
+    <p style="color: #666; font-size: 14px;">Student ID: {{ student_id }}</p>
+
+    {% if grades %}
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grade in grades %}
+            <tr>
+                <td>{{ grade.subject }}</td>
+                <td><strong>{{ grade.grade }}</strong></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color: #999; margin-top: 15px;">No grades available yet.</p>
+    {% endif %}
+</div>
+
+<div style="background: #fff3cd; padding: 15px; border-radius: 5px; border-left: 4px solid #ffc107; margin-top: 20px;">
+    <p style="font-size: 14px; color: #856404;">
+        <strong>💡 Hint for Assessment:</strong> Try changing the "id" parameter in the URL to see other students' grades.
+        This is a security vulnerability you need to find and fix!
+    </p>
+</div>
+{% endblock %}
